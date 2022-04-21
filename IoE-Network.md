@@ -20,6 +20,41 @@ Building an open network for credential exchange and presentation allows for hig
 
 The IoE Network is an open credential network, focused on building an interoperable protocol for the exchange, storage, and presentation of VCs.
 
+# Credential Exchange Example
+
+
+
+1. Alice has completed an online course teaching skill X and taken an exam that measures what she’s learned.
+2. She has earned herself a passing grade on the exam demonstrating understanding of skill X.
+3. Upon completion, a skill credential capturing this is prepared by the course provider, Bob.
+4. Bob uses Alice’s known DID, a course credential template, and his known DID to construct and sign a verifiable credential (VC). 
+5. Bob then uses an exchange mechanism agreed upon by him and Alice to send the VC. 
+6. Alice receives the VC.
+7. Alice verifies the VC was signed by Bob by comparing the VC signature against the expected DID of Bob.
+8. Alice validates the VC represents the correct skill credential by comparing the credential object against the expected credential template.
+9. Alice confirms the VC is accurate and decides to store it in her preferred storage mechanism. 
+
+
+# Presentation Exchange Example
+
+
+
+1. Alice would like to apply for a job that requires skill X as a competency.
+2. Alice knows skill X and has proof in the form of a verifiable credential (VC).
+3. Alice’s VC was issued by a reputable issuer A and feels she qualifies for the job, so she decides to apply. 
+4. As part of the application process, Alice is asked to prove she knows skill X by presenting a VC to verifier, Bob.
+5. Bob sends over a proof request to Alice through an exchange protocol agreed upon.
+6. Alice receives the proof request.
+7. Alice deconstructs the proof request to confirm it is requesting skill X proof.
+8. Alice queries her credential data stores for skill X VC.
+9. Alice prepares a verifiable presentation (VP) of her VC. 
+10. Alice’s VP may utilize cryptographic techniques to minimize what is disclosed, prevent signature correlation, etc, but it at minimum proves to Bob she contains a VC of skill X by issuer A.
+11. Alice exchanges the VP with Bob using an agreed upon protocol.
+12. Bob receives the VP.
+13. Bob verifies the VP was signed by Alice by comparing the VP signature against the expected DID of Alice.
+14. Bob deconstructs the VP to verify the VC proof proves skill X and expected issuer A.
+15. Alice’s job application now contains proof of skill X.
+
 
 # Goals
 
@@ -47,6 +82,7 @@ The IoE Network is an open credential network, focused on building an interopera
 * **Triangle of Trust** – three roles of the “trust triangle” which make credentials of any kind work: issuing the credential, holding it in a wallet, and verifying it when it's presented by the holder.
 * **Verifiable credential **– a tamper-evident credential that has authorship that can be cryptographically verified.
 * **Verifiable presentation** – tamper-evident presentation encoded in such a way that authorship of the data can be trusted after a process of cryptographic verification.
+
 
 
 # Protocol
@@ -346,42 +382,6 @@ Building the protocol as a set of plugins allows for standard protocol call patt
 Plugins are provided by community and core contributors. Given the plugin’s nature, they may also host and maintain infrastructure necessary to sustain its call patterns. For example, an IPFS storage provider might also provide a pinning service, a DID document provider might host document endpoints, etc.
 
 These details are to be provided along with the plugin. 
-
-
-# Credential Exchange Example
-
-
-
-1. Alice has completed an online course teaching skill X and taken an exam that measures what she’s learned.
-2. She has earned herself a passing grade on the exam demonstrating understanding of skill X.
-3. Upon completion, a skill credential capturing this is prepared by the course provider, Bob.
-4. Bob uses Alice’s known DID, a course credential template, and his known DID to construct and sign a verifiable credential (VC). 
-5. Bob then uses an exchange mechanism agreed upon by him and Alice to send the VC. 
-6. Alice receives the VC.
-7. Alice verifies the VC was signed by Bob by comparing the VC signature against the expected DID of Bob.
-8. Alice validates the VC represents the correct skill credential by comparing the credential object against the expected credential template.
-9. Alice confirms the VC is accurate and decides to store it in her preferred storage mechanism. 
-
-
-# Presentation Exchange Example
-
-
-
-1. Alice would like to apply for a job that requires skill X as a competency.
-2. Alice knows skill X and has proof in the form of a verifiable credential (VC).
-3. Alice’s VC was issued by a reputable issuer A and feels she qualifies for the job, so she decides to apply. 
-4. As part of the application process, Alice is asked to prove she knows skill X by presenting a VC to verifier, Bob.
-5. Bob sends over a proof request to Alice through an exchange protocol agreed upon.
-6. Alice receives the proof request.
-7. Alice deconstructs the proof request to confirm it is requesting skill X proof.
-8. Alice queries her credential data stores for skill X VC.
-9. Alice prepares a verifiable presentation (VP) of her VC. 
-10. Alice’s VP may utilize cryptographic techniques to minimize what is disclosed, prevent signature correlation, etc, but it at minimum proves to Bob she contains a VC of skill X by issuer A.
-11. Alice exchanges the VP with Bob using an agreed upon protocol.
-12. Bob receives the VP.
-13. Bob verifies the VP was signed by Alice by comparing the VP signature against the expected DID of Alice.
-14. Bob deconstructs the VP to verify the VC proof proves skill X and expected issuer A.
-15. Alice’s job application now contains proof of skill X.
 
 
 # To Dos 
